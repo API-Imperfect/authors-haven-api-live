@@ -1,0 +1,6 @@
+-r base.txt
+
+psycopg2==2.9.3
+flake8==4.0.1
+black==21.12b0
+isort==5.9.3
