@@ -1,7 +1,7 @@
 CELERY_BROKER=redis://redis:6379/0
 CELERY_BACKEND=redis://redis:6379/0
 
-DOMAIN=locahost:8000
+DOMAIN=locahost:8080
 EMAIL_PORT=1025
 
 CELERY_FLOWER_USER=admin
