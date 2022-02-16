@@ -23,3 +23,7 @@ django-celery-email==3.0.0
 djoser==2.1.0
 djangorestframework-simplejwt==4.8.0
 PyJWT==2.1.0
+
+django-haystack==3.1.1
+Whoosh==2.7.4
+drf-haystack==1.8.11
