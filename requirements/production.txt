@@ -1,0 +1,5 @@
+-r base.txt
+
+gunicorn==20.1.0
+psycopg2==2.9.3
+whitenoise==5.3.0

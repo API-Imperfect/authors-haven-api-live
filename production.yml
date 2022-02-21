@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+    api: &api
+        build:
+            context: .
+            dockerfile: ./docker/production/django/Dockerfile
+        command: /start
+        image: authors-haven-api
+        env_file:
+            - ./.envs/.production/.django
+            - ./.envs/.production/.postgres
+        depends_on:
+            - redis
+        networks:
+            - reverseproxy-nw
+
+    redis:
+        image: redis:6-alpine
+        networks:
+            - reverseproxy-nw
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        env_file:
+            - ./.envs/.production/.django
+        networks:
+            - reverseproxy-nw
+
+    celery_worker:
+        <<: *api
+        image: authors-haven-celeryworker
+        command: /start-celeryworker
+        networks:
+            - reverseproxy-nw
+
+    flower:
+        <<: *api
+        image: authors-haven-flower
+        command: /start-flower
+        networks:
+            - reverseproxy-nw
+
+networks:
+    reverseproxy-nw:
+        external: true

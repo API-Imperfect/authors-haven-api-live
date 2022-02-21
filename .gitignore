@@ -3,8 +3,8 @@
 .coverage*
 .DS_Store
 staticfiles
-.envs/*
-!.envs/.local/
+# .envs/*
+# !.envs/.local/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
