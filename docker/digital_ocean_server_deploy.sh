@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ -z "$DIGITAL_OCEAN_IP_ADDRESS"]
+if [ -z "$DIGITAL_OCEAN_IP_ADDRESS" ]
 then
     echo "DIGITAL_OCEAN_IP_ADDRESS not defined"
     exit 0
