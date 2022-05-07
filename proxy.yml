@@ -1,0 +1,44 @@
+version: "3"
+services:
+    app:
+        image: "jc21/nginx-proxy-manager:latest"
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+            - "81:81"
+            - "5555:5555"
+            - "15672:15672"
+        environment:
+            DB_MYSQL_HOST: "proxy-manager-db"
+            DB_MYSQL_PORT: 3306
+            DB_MYSQL_USER: "npm"
+            DB_MYSQL_PASSWORD: "00000000000"
+            DB_MYSQL_NAME: "npm"
+
+        volumes:
+            - /root/proxy-manager/data:/data:z
+            - /root/proxy-manager/letsencrypt:/etc/letsencrypt
+        depends_on:
+            - proxy-manager-db
+        networks:
+            - nginx-proxy-manager-nw
+            - reverseproxy-nw
+
+    proxy-manager-db:
+        image: "jc21/mariadb-aria:latest"
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: "1111111111"
+            MYSQL_DATABASE: "npm"
+            MYSQL_USER: "npm"
+            MYSQL_PASSWORD: "00000000000"
+        volumes:
+            - /root/proxy-manager/data/mysql:/var/lib/mysql:z
+        networks:
+            - nginx-proxy-manager-nw
+
+networks:
+    nginx-proxy-manager-nw:
+    reverseproxy-nw:
+        external: true
